@@ -16,6 +16,16 @@
 - https://www.anchor-lang.com/docs/installation
 
 
+## install project dependencies
+
+```yarn```
+
+## generate a new keypair
+
+```solana-keygen new -o /home/asad/.config/solana/id.json```
 
 
+## run test
+
+```anchor test```
 
