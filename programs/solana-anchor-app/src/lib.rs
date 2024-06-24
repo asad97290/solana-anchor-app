@@ -6,17 +6,23 @@ declare_id!("JDwTaScuGrwKLXgoRqts9CVongoEZX8s6E8hpqWEr3AK");
 pub mod solana_anchor_app {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        ctx.accounts.new_account.data = 1;
-        ctx.accounts.new_account.text = "Hello".to_owned();
-        msg!("data {}",ctx.accounts.new_account.data);
-        msg!("text {}",ctx.accounts.new_account.text);
+    pub fn initialize(ctx: Context<Initialize>,_name:String,_symbol:String,_decimals:u32) -> Result<()> {
+        ctx.accounts.new_account.name = _name;
+        ctx.accounts.new_account.symbol = _symbol;
+        ctx.accounts.new_account.decimals = _decimals;
         Ok(())
     }
 
-    pub fn initialize2(ctx: Context<GetAccount>,_data:u32) -> Result<()> {
-        ctx.accounts.master.data = _data;
+    pub fn change_name_symbol(ctx: Context<SetAccount>,_name:String,_symbol:String) -> Result<()> {
+        ctx.accounts.master.name = _name;
+        ctx.accounts.master.symbol = _symbol;
         Ok(())
+    }
+
+    pub fn block_timestamp(_ctx: Context<GetTime>) -> Result<i64> {
+        let clock: Clock = Clock::get()?;
+        
+        Ok(clock.unix_timestamp)
     }
 }
 
@@ -35,14 +41,16 @@ pub struct Initialize<'info> {
 }
 #[account]
 pub struct NewAccount{
-    pub data:u32,
-    pub text:String
+    pub name:String,
+    pub symbol:String,
+    pub decimals:u32
 }
 
 
 
 #[derive(Accounts)]
-pub struct GetAccount<'info> {
+pub struct SetAccount<'info> {
+
     
     #[account(
         mut,
@@ -54,3 +62,7 @@ pub struct GetAccount<'info> {
     pub authority: Signer<'info>,
     pub system_program: Program<'info, System>,
 }
+
+
+#[derive(Accounts)]
+pub struct GetTime{}

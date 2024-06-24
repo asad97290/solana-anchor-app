@@ -1,6 +1,9 @@
 ## install solana CLI 
+
 ```sh -c "$(curl -sSfL https://release.solana.com/v1.18.12/install)"```
+
 ## update to latest version
+
 ```solana-install update```
 
 - https://docs.solanalabs.com/cli/install
