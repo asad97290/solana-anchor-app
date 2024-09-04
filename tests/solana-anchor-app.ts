@@ -7,7 +7,7 @@ describe("solana-anchor-app", () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
   const program = anchor.workspace.SolanaAnchorApp as Program<SolanaAnchorApp>;
-  const seed = "master" 
+  const seed = "master_acc" 
   it("Is initialized!", async () => {
 
     // Initialize the program.
