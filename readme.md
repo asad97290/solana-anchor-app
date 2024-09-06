@@ -1,6 +1,7 @@
 ## install solana CLI 
 
 ```sh -c "$(curl -sSfL https://release.solana.com/v1.18.12/install)"```
+```export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"```
 
 ## update to latest version
 
